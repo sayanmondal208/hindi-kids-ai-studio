@@ -3,7 +3,8 @@ name: Daily Kids Video Automation
 
 on:
   schedule:
-    - cron: '30 4 * * *'
+    - cron: '30 4 * * *'   # 10:00 AM IST
+    - cron: '30 16 * * *'  # 10:00 PM IST
   workflow_dispatch:
 
 jobs:
@@ -14,5 +15,6 @@ jobs:
       - name: Start daily automation
         run: |
           echo "Hindi Kids Cartoon Studio started!"
-          echo "Scheduled time: 10:00 AM IST"
-          echo "Daily target: 1 Long Video + 2 Shorts"
+          echo "Daily schedule: 10 AM and 10 PM IST"
+          echo "10 AM: 1 Long Video + 1 Short"
+          echo "10 PM: 1 Short"
