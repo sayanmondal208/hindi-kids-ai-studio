@@ -11,10 +11,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Blender
+      - name: Install Blender and Graphics Libraries
         run: |
           sudo apt-get update
-          sudo apt-get install -y blender
+          sudo apt-get install -y blender libegl1 libgl1 libxrender1 libxi6
 
       - name: Render 3D Rabbit
         run: |
