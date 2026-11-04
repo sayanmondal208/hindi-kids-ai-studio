@@ -1,0 +1,31 @@
+
+name: Generate Cartoon Scenes
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-scenes:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Pillow
+        run: pip install pillow
+
+      - name: Generate cartoon scenes
+        run: python generate_video.py
+
+      - name: Save generated scenes
+        uses: actions/upload-artifact@v4
+        with:
+          name: hindi-cartoon-scenes
+          path: output/
+          retention-days: 7
