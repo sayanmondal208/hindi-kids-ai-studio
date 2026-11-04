@@ -16,9 +16,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y blender libegl1 libgl1 libxrender1 libxi6
 
-      - name: Render 3D Rabbit
+      - name: Render 3D Rabbit Preview
         run: |
-          blender --background --python blender_scene.py --render-anim
+          blender --background --python blender_scene.py  --render-frame 1
 
       - name: Upload Rendered Frames
         uses: actions/upload-artifact@v4
