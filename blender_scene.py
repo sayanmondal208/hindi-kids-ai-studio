@@ -50,9 +50,17 @@ ground.name = "Green Grass"
 ground.data.materials.append(green)
 
 # Camera
-bpy.ops.object.camera_add(location=(5, -9, 4))
+bpy.ops.object.camera_add(location=(6, -10, 5))
 camera = bpy.context.object
-camera.rotation_euler = (math.radians(68), 0, math.radians(29))
+
+target = bpy.data.objects.new("Camera Target", None)
+bpy.context.collection.objects.link(target)
+target.location = (0, 0, 1.7)
+
+direction = target.location - camera.location
+camera.rotation_euler = direction.to_track_quat('-Z', 'Y').to_euler()
+camera.data.lens = 50
+
 bpy.context.scene.camera = camera
 
 # Lighting
