@@ -1,0 +1,18 @@
+
+name: Daily Kids Video Automation
+
+on:
+  schedule:
+    - cron: '30 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  automation-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Start daily automation
+        run: |
+          echo "Hindi Kids Cartoon Studio started!"
+          echo "Scheduled time: 10:00 AM IST"
+          echo "Daily target: 1 Long Video + 2 Shorts"
