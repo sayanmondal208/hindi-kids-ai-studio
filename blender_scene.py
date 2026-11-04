@@ -70,19 +70,29 @@ light.data.energy = 1200
 light.data.shape = 'DISK'
 light.data.size = 5
 
-# Animation: rabbit moves forward
+# Animation: Move the complete rabbit together
 body = bpy.data.objects["Rabbit Body"]
-head = bpy.data.objects["Rabbit Head"]
 
-body.location.x = -2
-head.location.x = -2
+# Attach every rabbit part to the body
+for obj in bpy.context.scene.objects:
+    if obj.type == 'MESH' and obj.name != "Green Grass" and obj != body:
+        world_matrix = obj.matrix_world.copy()
+        obj.parent = body
+        obj.matrix_world = world_matrix
+
+# Animate the complete rabbit
+body.location.x = -1
 body.keyframe_insert(data_path="location", frame=1)
-head.keyframe_insert(data_path="location", frame=1)
 
-body.location.x = 2
-head.location.x = 2
+body.location.x = 1
 body.keyframe_insert(data_path="location", frame=72)
-head.keyframe_insert(data_path="location", frame=72)
+
+# Smooth animation
+for obj in bpy.data.objects:
+    if obj.animation_data and obj.animation_data.action:
+        for curve in obj.animation_data.action.fcurves:
+            for key in curve.keyframe_points:
+                key.interpolation = 'BEZIER'
 
 # Render settings
 scene = bpy.context.scene
