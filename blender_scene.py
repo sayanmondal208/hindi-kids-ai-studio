@@ -85,6 +85,8 @@ scene.render.resolution_x = 1280
 scene.render.resolution_y = 720
 scene.render.resolution_percentage = 100
 scene.render.image_settings.file_format = 'PNG'
-scene.render.filepath = "//rabbit.png"
+import os  
+os.makedirs("output", exist_ok=True) 
+scene.render.filepath = os.path.abspath("output/rabbit_")
 
 print("3D Rabbit scene created!")
