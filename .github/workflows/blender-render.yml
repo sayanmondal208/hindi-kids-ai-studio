@@ -1,0 +1,28 @@
+name: Blender 3D Render Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Blender
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y blender
+
+      - name: Render 3D Rabbit
+        run: |
+          blender --background --python blender_scene.py --render-anim
+
+      - name: Upload Rendered Frames
+        uses: actions/upload-artifact@v4
+        with:
+          name: rabbit-3d-render
+          path: rabbit*.png
+          if-no-files-found: warn
